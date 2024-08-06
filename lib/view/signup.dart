@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:online_flower_shop/controller/signupcontroller.dart';
 import 'package:online_flower_shop/view/login.dart';
 import 'package:online_flower_shop/view/widgets/custom_button.dart';
 import 'package:online_flower_shop/view/widgets/custom_textfeild.dart';
@@ -10,6 +11,7 @@ import 'package:online_flower_shop/view/widgets/pdfbuttun.dart';
 class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final SignUpController controller = Get.put(SignUpController());
     return ScreenUtilInit(
       designSize: const Size(430, 932),
       minTextAdapt: true,
@@ -19,17 +21,7 @@ class SignUpScreen extends StatelessWidget {
         backgroundColor: const Color(0xFFE6F6F6),
         body: Stack(
           children: [
-            ClipPath(
-              clipper: BackgroundClipper(),
-              child: Column(
-                children: [
-                  Container(
-                    color: const Color(0xFFF6E1D8),
-                    height: MediaQuery.of(context).size.height / 2,
-                  ),
-                ],
-              ),
-            ),
+            Image.asset('assets/images/Rectangle22.png'),
             Positioned(
               left: MediaQuery.of(context).size.width * 0.5,
               top: MediaQuery.of(context).size.height * 0.01,
@@ -73,22 +65,53 @@ class SignUpScreen extends StatelessWidget {
                               const CustomTextFormAuth(
                                 labeltext: 'Email',
                                 isNumber: false,
+                                icon: null,
                               ),
                               const CustomTextFormAuth(
                                 labeltext: 'Phone Number',
                                 isNumber: true,
+                                icon: null,
                               ),
                               const CustomTextFormAuth(
                                 labeltext: 'User Name',
                                 isNumber: false,
+                                icon: null,
                               ),
-                              const CustomTextFormAuth(
-                                labeltext: 'Password',
-                                isNumber: false,
+                              GetBuilder<SignUpController>(
+                                builder: (controller) {
+                                  return CustomTextFormAuth(
+                                    labeltext: 'Password',
+                                    isNumber: false,
+                                    isPasswordField: true,
+                                    obscureText:
+                                        !controller.isPasswordVisible.value,
+                                    onTapIcon:
+                                        controller.togglePasswordVisibility,
+                                    icon: Icon(
+                                      controller.isPasswordVisible.value
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                    ),
+                                  );
+                                },
                               ),
-                              const CustomTextFormAuth(
-                                labeltext: 'Re Password',
-                                isNumber: false,
+                              GetBuilder<SignUpController>(
+                                builder: (controller) {
+                                  return CustomTextFormAuth(
+                                    labeltext: 'Re Password',
+                                    isNumber: false,
+                                    isPasswordField: true,
+                                    obscureText:
+                                        !controller.isRePasswordVisible.value,
+                                    onTapIcon:
+                                        controller.toggleRePasswordVisibility,
+                                    icon: Icon(
+                                      controller.isRePasswordVisible.value
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                    ),
+                                  );
+                                },
                               ),
                               CustomPDFButton(),
                               const CustomButtomAuth(
@@ -142,22 +165,5 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class BackgroundClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    path.lineTo(0, size.height * .2);
-    path.lineTo(size.width, size.height / 3);
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return false;
   }
 }

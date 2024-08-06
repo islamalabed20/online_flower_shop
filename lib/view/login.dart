@@ -93,15 +93,15 @@ class LoginPage extends StatelessWidget {
                           children: [
                             const CustomTextFormAuth(
                               labeltext: 'Email',
-                              isNumber: false,
+                              isNumber: false, icon: null,
                             ),
                             const CustomTextFormAuth(
                               labeltext: 'Phone Number',
-                              isNumber: false,
+                              isNumber: false, icon: null,
                             ),
                             const CustomTextFormAuth(
                               labeltext: 'Password',
-                              isNumber: false,
+                              isNumber: false, icon: null,
                             ),
                             const Text(
                               "Should be none less than 8 characters",

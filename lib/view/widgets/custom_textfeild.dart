@@ -1,36 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:online_flower_shop/controller/signupcontroller.dart';
+// Import your controller
 
 class CustomTextFormAuth extends StatelessWidget {
   final String labeltext;
   final TextEditingController? mycontroller;
-  //final String? Function(String?) valid;
   final bool isNumber;
-  final bool? obscureText;
-  final void Function()? onTapIcon;
+  final bool isPasswordField;
+  final bool obscureText;
+  final Icon? icon;
+  final VoidCallback? onTapIcon;
 
-  const CustomTextFormAuth(
-      {super.key,
-      this.obscureText,
-      this.onTapIcon,
-      required this.labeltext,
-      this.mycontroller,
-      //  required this.valid,
-      required this.isNumber});
+  const CustomTextFormAuth({
+    Key? key,
+    required this.labeltext,
+    this.mycontroller,
+    required this.isNumber,
+    this.isPasswordField = false,
+    this.obscureText = false,
+    this.icon,
+    this.onTapIcon,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Get the SignUpController instance
+    final SignUpController controller = Get.find();
+
     return Padding(
-      padding: const EdgeInsets.only(
-        bottom: 15,
-      ),
+      padding: const EdgeInsets.only(bottom: 15),
       child: TextField(
         keyboardType: isNumber
             ? const TextInputType.numberWithOptions(decimal: true)
             : TextInputType.text,
-        // validator: valid,
         controller: mycontroller,
-        obscureText: obscureText == null || obscureText == false ? false : true,
+        obscureText: isPasswordField
+            ? (obscureText
+                ? !controller.isPasswordVisible.value
+                : !controller.isRePasswordVisible.value)
+            : obscureText,
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
@@ -38,13 +47,31 @@ class CustomTextFormAuth extends StatelessWidget {
             borderRadius: BorderRadius.circular(5.0),
             borderSide: BorderSide.none,
           ),
-          label: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 9),
-              child: Text(
-                labeltext,
-                style: const TextStyle(
-                    fontWeight: FontWeight.w400, color: Colors.grey),
-              )),
+          labelText: labeltext,
+          //  prefixIcon: icon,
+          suffixIcon: isPasswordField
+              ? IconButton(
+                  icon: Icon(
+                    isPasswordField
+                        ? (labeltext == 'Password'
+                            ? controller.isPasswordVisible.value
+                                ? Icons.visibility
+                                : Icons.visibility_off
+                            : controller.isRePasswordVisible.value
+                                ? Icons.visibility
+                                : Icons.visibility_off)
+                        : Icons.remove_red_eye,
+                  ),
+                  onPressed: onTapIcon ??
+                      () {
+                        if (labeltext == 'Password') {
+                          controller.togglePasswordVisibility();
+                        } else {
+                          controller.toggleRePasswordVisibility();
+                        }
+                      },
+                )
+              : null,
         ),
       ),
     );

@@ -13,7 +13,7 @@ class CustomPDFButton extends StatelessWidget {
         Obx(() => Container(
               padding: const EdgeInsets.only(bottom: 15),
               child: InkWell(
-                onTap: controller.pickPDF,
+                onTap: controller.pickPdf,
                 child: Container(
                   height: 60, // Adjust the height as needed
                   decoration: BoxDecoration(

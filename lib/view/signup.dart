@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:online_flower_shop/view/login.dart';
 import 'package:online_flower_shop/view/widgets/custom_button.dart';
 import 'package:online_flower_shop/view/widgets/custom_textfeild.dart';
+import 'package:online_flower_shop/view/widgets/customarrowback.dart';
 import 'package:online_flower_shop/view/widgets/pdfbuttun.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -36,6 +38,7 @@ class SignUpScreen extends StatelessWidget {
                 width: 170,
               ),
             ),
+            CustomBack(),
             SingleChildScrollView(
               child: Center(
                 child: Padding(
@@ -91,7 +94,7 @@ class SignUpScreen extends StatelessWidget {
                               const CustomButtomAuth(
                                 text: 'Sign Up',
                               ),
-                              const Padding(
+                              Padding(
                                 padding: EdgeInsets.only(top: 20.0),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -103,11 +106,16 @@ class SignUpScreen extends StatelessWidget {
                                         color: Color(0XFF8C8A8C),
                                       ),
                                     ),
-                                    Text(
-                                      "Login",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        color: Color(0xFF3C2367),
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(LoginPage());
+                                      },
+                                      child: Text(
+                                        "Login",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xFF3C2367),
+                                        ),
                                       ),
                                     ),
                                   ],

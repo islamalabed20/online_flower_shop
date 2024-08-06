@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:online_flower_shop/view/signup.dart';
 import 'package:online_flower_shop/view/widgets/custom_button.dart';
 import 'package:online_flower_shop/view/widgets/custom_textfeild.dart';
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final double width = size.width;
     final double height = size.height;
 
-    return SafeArea(
+    return ScreenUtilInit(
+      designSize: const Size(430, 932),
+      minTextAdapt: true,
+      splitScreenMode: true,
       child: Scaffold(
         backgroundColor: const Color(0xFFE6F6F6),
         body: Stack(
@@ -37,8 +45,8 @@ class LoginPage extends StatelessWidget {
             ),
             // Bottom-left positioned element
             Positioned(
-              bottom: 0, // Adjust the top position as needed
-              left: -5, //
+              top: Get.height * 0.8, // Adjust the top position as needed
+              right: Get.width * 0.6, //
               child: Container(
                 width: 230.0, // Adjust the size as needed
                 height: 230.0, // Adjust the size as needed
@@ -49,13 +57,13 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 0, // Adjust the bottom position as needed
-              left: 0, // Adjust the left position as needed
+              bottom: 1, // Adjust the bottom position as needed
+              right: Get.width * 0.53, // Adjust the left position as needed
               child: Image.asset('assets/images/download.png'),
             ),
             SingleChildScrollView(
-              child: Container(
-                height: height,
+              child: SizedBox(
+                height: Get.height * 1.2,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: width * 0.1,
@@ -103,25 +111,30 @@ class LoginPage extends StatelessWidget {
                               "Forget password?",
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
-                                color: Color(0xFF8FF0000),
+                                color: Color(0xff8ff0000),
                               ),
                             ),
                             SizedBox(height: height * 0.04),
-                            const Row(
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   "Don't have an account? ",
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
                                     color: Color(0XFF8C8A8C),
                                   ),
                                 ),
-                                Text(
-                                  "Sign up",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    color: Color(0xFF3C2367),
+                                InkWell(
+                                  onTap: () {
+                                    Get.to(SignUpScreen());
+                                  },
+                                  child: const Text(
+                                    "Sign up",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xFF3C2367),
+                                    ),
                                   ),
                                 ),
                               ],

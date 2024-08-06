@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:online_flower_shop/view/widgets/custom_button.dart';
 import 'package:online_flower_shop/view/widgets/custom_textfeild.dart';
+import 'package:online_flower_shop/view/widgets/pdfbuttun.dart';
 
 class SignUpScreen extends StatelessWidget {
   @override
@@ -38,13 +41,11 @@ class SignUpScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 50.0),
+                    padding: const EdgeInsets.only(top: 40.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const SizedBox(
-                          height: 110,
-                        ),
+                        SizedBox(height: 70),
                         const Text(
                           'Sign Up',
                           style: TextStyle(
@@ -86,28 +87,40 @@ class SignUpScreen extends StatelessWidget {
                                 labeltext: 'Re Password',
                                 isNumber: false,
                               ),
-                              const SizedBox(height: 20),
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: const Text("Upload PDF"),
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.black,
-                                  backgroundColor: Colors.grey.shade300,
+                              CustomPDFButton(),
+                              const CustomButtomAuth(
+                                text: 'Sign Up',
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(top: 20.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Already have an account?  ",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0XFF8C8A8C),
+                                      ),
+                                    ),
+                                    Text(
+                                      "Login",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0xFF3C2367),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              const SizedBox(height: 20),
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: const Text("Sign Up"),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.purple,
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                child: Divider(
+                                  color: Colors.grey,
+                                  thickness: 1,
                                 ),
-                              ),
-                              TextButton(
-                                onPressed: () {},
-                                child: const Text(
-                                    "Already have an account? Login"),
-                              ),
+                              )
                             ],
                           ),
                         ),
